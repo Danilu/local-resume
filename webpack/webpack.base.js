@@ -7,6 +7,10 @@ module.exports = {
     alias: {
       '@src': path.join(__dirname, '../', 'app/renderer'),
     },
+    alias:{
+      '@assets': path.join(__dirname, '../', 'assets/'),
+      '@src': path.join(__dirname, '../', 'app/renderer'),
+    }
   },
   module: {
     rules: [

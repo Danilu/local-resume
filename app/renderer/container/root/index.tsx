@@ -1,3 +1,4 @@
+import { shell } from 'electron';
 import React from 'react';
 import { useHistory } from 'react-router';
 import './index.less';
@@ -7,10 +8,10 @@ function Root() {
     const history = useHistory();
 
     const onRouterToLink = (text: string) => {
-        if (text === '简历') {
-            history.push('/resume')
+        if (text !== '简历') {
+            shell.openExternal('https://github.com/Danilu/local-resume')
         } else {
-            console.log("访问gitHub");
+            history.push('/resume')
         }
     }
 
