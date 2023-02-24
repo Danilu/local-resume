@@ -1,17 +1,20 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch } from "react-router";
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import Title from './Title';
 
 function App() {
-    return (
-        <Route>
-            <Switch>
-                <Route path="/">
-                    <div>Electron + React</div>
-                </Route>
-            </Switch>
+  return (
+    <Router>
+      <Switch>
+        <Route path="/">
+          <div>可视化简历平台</div>
+          <div>这是 Electron + React </div>
+          <Title text="1" />
         </Route>
-    )
+      </Switch>
+    </Router>
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
