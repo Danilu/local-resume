@@ -1,3 +1,5 @@
+import { ROUTER, ROUTER_ENTRY } from '@src/common/router';
+import { isHttpOrHttpsUrl } from '@src/common/utils/route';
 import { shell } from 'electron';
 import React from 'react';
 import { useHistory } from 'react-router';
@@ -7,11 +9,11 @@ function Root() {
     // 通过history.push（）进行跳转
     const history = useHistory();
 
-    const onRouterToLink = (text: string) => {
-        if (text !== '简历') {
-            shell.openExternal('https://github.com/Danilu/local-resume')
+    const onRouterToLink = (router: TSRouter.Item) => {
+        if (isHttpOrHttpsUrl(router.url)) {
+            shell.openExternal(router.url)
         } else {
-            history.push('/resume')
+            history.push(router.url)
         }
     }
 
@@ -21,9 +23,9 @@ function Root() {
                 <div styleName='title'>简历</div>
                 <div styleName='tips'>简历模板制作平台</div>
                 <div styleName='action'>
-                    {['介绍', '简历', '源码'].map((text, index) => {
+                    {ROUTER_ENTRY.map((route: TSRouter.Item) => {
                         return (
-                            <div key={index} styleName='item' onClick={() => onRouterToLink(text)}>{text}</div>
+                            <div key={route.key} styleName='item' onClick={() => onRouterToLink(route)}>{route.text}</div>
                         )
                     })}
                 </div>
