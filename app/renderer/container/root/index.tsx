@@ -1,11 +1,28 @@
 import { ROUTER, ROUTER_ENTRY } from '@src/common/router';
 import { isHttpOrHttpsUrl } from '@src/common/utils/route';
 import { shell } from 'electron';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import './index.less';
 
 function Root() {
+    const dispatch = useDispatch();
+    const appName = useSelector((state: any) => state.globalModel.appName)
+
+    useEffect(() => {
+        setTimeout(() => {
+          console.log('3s 后修改...');
+          dispatch({
+            type: 'globalModel/setStore',
+            payload: {
+              key: 'appName',
+              values: 'visResumeMook',
+            },
+          });
+        }, 3000);
+      }, []);
+      
     // 通过history.push（）进行跳转
     const history = useHistory();
 
